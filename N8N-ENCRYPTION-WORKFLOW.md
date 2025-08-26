@@ -1,126 +1,85 @@
-# n8n Phase Encryption Workflow
+# Phase Encryption Specification for F4 n8n Flow
 
 ## Overview
-This document describes how n8n should process the phase templates: replacing placeholders, encrypting phases, and managing keys.
+This document specifies how the existing F4 n8n workflow should be extended to handle phase templates when creating new product repositories.
 
-## Workflow Steps
+## Integration Point
+The F4 workflow should process phase templates **after** creating the GitHub repository but **before** the final commit.
 
-### 1. Template Processing
-Process all phase template files and replace placeholders:
+## Required Processing Steps
 
-```javascript
-// Templates to process
-const phaseTemplates = [
-  'phase-0-foundation-template.md',
-  'phase-1-template.md', 
-  'phase-2-template.md',
-  'phase-3-template.md',
-  'phase-4-template.md',
-  'phase-5-template.md',
-  'phase-6-template.md'
-];
+### 1. Template Files to Process
+The F4 flow needs to process these template files from `dreamteam-product-template-phased`:
+- `phase-0-foundation-template.md` → `phase-0-foundation.md` (unencrypted)
+- `phase-1-template.md` → `phase-1-encrypted.md.enc`
+- `phase-2-template.md` → `phase-2-encrypted.md.enc`
+- `phase-3-template.md` → `phase-3-encrypted.md.enc`
+- `phase-4-template.md` → `phase-4-encrypted.md.enc`
+- `phase-5-template.md` → `phase-5-encrypted.md.enc`
+- `phase-6-template.md` → `phase-6-encrypted.md.enc`
 
-// For each template
-phaseTemplates.forEach(template => {
-  let content = readFile(template);
-  
-  // Replace all placeholders
-  Object.entries(placeholders).forEach(([key, value]) => {
-    const regex = new RegExp(`{{${key}}}`, 'g');
-    content = content.replace(regex, value);
-  });
-  
-  // Save with new name (remove -template suffix)
-  const outputName = template.replace('-template', '');
-  writeFile(outputName, content);
-});
-```
+### 2. Placeholder Replacement
+All templates use the same placeholders already available in F4 (see PLACEHOLDER-GUIDE.md for complete list).
 
-### 2. Generate Encryption Keys
-Create unique keys for phases 1-6:
+### 3. Encryption Requirements
 
-```javascript
-// Generate keys for each phase (except 0)
-const phaseKeys = {};
-for (let i = 1; i <= 6; i++) {
-  // Generate random 32-byte key and encode as base64
-  const key = crypto.randomBytes(32).toString('base64');
-  phaseKeys[`phase_${i}`] = key;
-}
-```
+**Phase 0**: 
+- Replace placeholders only
+- Save as `phase-0-foundation.md`
+- Do NOT encrypt
 
-### 3. Encrypt Phase Files
-Encrypt phases 1-6 using AES-256-CBC:
+**Phases 1-6**:
+- Replace placeholders first
+- Generate unique 32-byte key per phase
+- Encrypt using: `openssl enc -aes-256-cbc -salt -pbkdf2 -in [input] -out [output].enc -k [key]`
+- Save with `.enc` extension
 
-```javascript
-// Encrypt each phase file (except phase-0)
-for (let i = 1; i <= 6; i++) {
-  const inputFile = `phase-${i}-${getPhaseFileName(i)}.md`;
-  const outputFile = `phase-${i}-encrypted.md.enc`;
-  const key = phaseKeys[`phase_${i}`];
-  
-  // Use OpenSSL command
-  const encryptCmd = `openssl enc -aes-256-cbc -salt -pbkdf2 \
-    -in "${inputFile}" \
-    -out "${outputFile}" \
-    -k "${key}"`;
-    
-  executeCommand(encryptCmd);
-  
-  // Delete unencrypted file
-  deleteFile(inputFile);
-}
+### 4. Key Storage
 
-// Helper function for phase file names
-function getPhaseFileName(phaseNum) {
-  const names = {
-    1: 'stories',
-    2: 'handoffs', 
-    3: 'parallel',
-    4: 'orchestration',
-    5: 'mvp',
-    6: 'working'
-  };
-  return names[phaseNum];
-}
-```
-
-### 4. Store Keys in Linear
-Create a secure document with all keys:
-
-```javascript
-// Create Linear document with keys
-const documentBody = `
-# Phase Unlock Keys for {{PRODUCT_NAME}}
+Generate a Linear document in the new product team:
+```markdown
+# Phase Unlock Keys for [PRODUCT_NAME]
 
 **⚠️ CONFIDENTIAL - Store Securely**
 
 ## Phase Keys
-
-- **Phase 1**: \`${phaseKeys.phase_1}\`
-- **Phase 2**: \`${phaseKeys.phase_2}\`
-- **Phase 3**: \`${phaseKeys.phase_3}\`
-- **Phase 4**: \`${phaseKeys.phase_4}\`
-- **Phase 5**: \`${phaseKeys.phase_5}\`
-- **Phase 6**: \`${phaseKeys.phase_6}\`
+- **Phase 1**: `[generated_key_1]`
+- **Phase 2**: `[generated_key_2]`
+- **Phase 3**: `[generated_key_3]`
+- **Phase 4**: `[generated_key_4]`
+- **Phase 5**: `[generated_key_5]`
+- **Phase 6**: `[generated_key_6]`
 
 ## Usage
 Provide these keys one at a time as Claude completes each phase.
-`;
-
-// Create document via Linear API
-await linearClient.createDocument({
-  title: `Phase Keys: ${productName}`,
-  content: documentBody,
-  teamId: teamUUID
-});
 ```
 
-### 5. Create Key Management File
-Generate KEY-MANAGEMENT.md for the repository:
+### 5. Repository Files
 
-```javascript
-const keyManagementContent = `# Key Management
+The F4 flow should create these files in the new product repository:
+
+**Encrypted phases**:
+- `phase-1-encrypted.md.enc`
+- `phase-2-encrypted.md.enc`
+- `phase-3-encrypted.md.enc`
+- `phase-4-encrypted.md.enc`
+- `phase-5-encrypted.md.enc`
+- `phase-6-encrypted.md.enc`
+
+**Unencrypted files**:
+- `phase-0-foundation.md` (with placeholders replaced)
+- `KEY-MANAGEMENT.md` (status tracking file)
+
+**Do NOT include**:
+- Template files (phase-*-template.md)
+- PLACEHOLDER-GUIDE.md
+- This specification document
+
+### 6. KEY-MANAGEMENT.md Content
+
+Create this file in the repository with static content:
+```markdown
+# Key Management
 
 ## Phase Unlock System
 
@@ -139,78 +98,49 @@ This project uses encrypted phases for progressive skill validation.
 Keys are provided by the Business Owner upon successful completion of each phase.
 
 ### Unlock Command
-\`\`\`bash
+```bash
 npm run unlock
-\`\`\`
+```
 
 Then enter the key when prompted.
-`;
-
-writeFile('KEY-MANAGEMENT.md', keyManagementContent);
 ```
 
-### 6. Clean Up Templates
-Remove template files after processing:
+## Key Generation Specification
 
-```javascript
-// Delete all template files
-phaseTemplates.forEach(template => {
-  deleteFile(template);
-});
+Each phase key should be:
+- 32 bytes of random data
+- Base64 encoded for storage
+- Unique per phase per project
+- Generated using cryptographically secure random source
 
-// Delete PLACEHOLDER-GUIDE.md (not needed in final repo)
-deleteFile('PLACEHOLDER-GUIDE.md');
-```
+Example command: `openssl rand -base64 32`
 
-## Required Placeholders
+## Validation Checklist
 
-The following placeholders MUST be provided by n8n from Linear data:
+After processing phase templates, verify:
 
-### Core Placeholders
-- `{{PRODUCT_NAME}}` - Product name from solution
-- `{{PRODUCT_TITLE}}` - Full product title
-- `{{PRIMARY_FEATURE}}` - Core MVP feature
-- `{{SOLUTION_ID}}` - Linear solution UUID
-- `{{SOLUTION_IDENTIFIER}}` - Linear identifier (e.g., SOL-1001)
-- `{{TEAM_KEY}}` - Linear team key
-- `{{TEAM_UUID}}` - Linear team UUID
-- `{{GITHUB_URL}}` - GitHub repository URL
-- `{{GITHUB_REPO}}` - Repository name
+1. **Files exist in new repository**:
+   - [ ] phase-0-foundation.md (readable, placeholders replaced)
+   - [ ] phase-1-encrypted.md.enc through phase-6-encrypted.md.enc
+   - [ ] KEY-MANAGEMENT.md
+   - [ ] unlock-phase.sh script
 
-### Technical Placeholders  
-- `{{TECH_STACK}}` - Technology stack
-- `{{ARCHITECTURE_PATTERN}}` - Architecture type
-- `{{PORT}}` - Application port (default: 3000)
-- `{{DATABASE_TYPE}}` - Database choice
+2. **Placeholders replaced**:
+   - [ ] No `{{` or `}}` patterns in phase-0-foundation.md
+   - [ ] Product-specific values correctly inserted
 
-### Business Placeholders
-- `{{TARGET_AUDIENCE}}` - Target users
-- `{{PROBLEM_STATEMENT}}` - Core problem
-- `{{VALUE_PROPOSITION}}` - Key value prop
-- `{{PROBLEM_COUNT}}` - Number of problems
+3. **Encryption valid**:
+   - [ ] Each .enc file is actually encrypted (not readable)
+   - [ ] Test decryption with stored keys works
 
-## Integration Points
-
-### Input
-- Solution data from Linear (via GraphQL)
-- Phase template files from repository
-
-### Output  
-- Processed phase-0-foundation.md (unencrypted)
-- Encrypted phase-1-encrypted.md.enc through phase-6-encrypted.md.enc
-- KEY-MANAGEMENT.md in repository
-- Phase keys document in Linear
-
-### Verification
-After processing:
-1. Verify no `{{` patterns remain in phase-0
-2. Verify phases 1-6 are encrypted (.enc files)
-3. Verify Linear document created with keys
-4. Verify all template files removed
+4. **Linear document created**:
+   - [ ] Document exists in new product team
+   - [ ] Contains all 6 phase keys
+   - [ ] Marked as confidential
 
 ## Error Handling
 
-- If placeholder not found in Linear data, use sensible defaults
-- If encryption fails, abort and report error
-- If Linear document creation fails, output keys to console as backup
-- Always validate that phase-0 remains unencrypted and readable
+- If placeholder data missing: Use sensible defaults or abort with clear error
+- If encryption fails: Abort and log error, do not commit partial work
+- If Linear document fails: Save keys locally as backup, warn user
+- If any validation fails: Roll back changes, report specific failure
