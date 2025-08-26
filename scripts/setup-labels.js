@@ -45,6 +45,7 @@ const REQUIRED_LABELS = [
   { name: 'phase-3', color: '#F39C12', description: 'Phase 3 work' },
   { name: 'phase-4', color: '#E67E22', description: 'Phase 4 work' },
   { name: 'connectivity-verified', color: '#27AE60', description: 'API connectivity confirmed' },
+// Phase 3 specific labels  { name: 'components', color: '#FF6B6B', description: 'Component development' },  { name: 'status-report', color: '#4ECDC4', description: 'Status report' },  { name: 'project-management', color: '#45B7D1', description: 'Project management' },  { name: 'convergence', color: '#96E6B3', description: 'Convergence point' },  { name: 'parallel-work', color: '#F7DC6F', description: 'Parallel work stream' },  { name: 'dependency', color: '#BB8FCE', description: 'Has dependencies' },  { name: 'integration', color: '#85C1E2', description: 'Integration work' },  { name: 'design-system', color: '#F8C471', description: 'Design system' },  { name: 'sprint-planning', color: '#82E0AA', description: 'Sprint planning' },  { name: 'retrospective', color: '#F1948A', description: 'Sprint retrospective' },
 ];
 
 async function queryLinear(query, variables = {}) {
