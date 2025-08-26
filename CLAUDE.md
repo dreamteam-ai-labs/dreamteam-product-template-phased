@@ -1,4 +1,4 @@
-# CLAUDE.md - {{PRODUCT_NAME}}
+# CLAUDE.md - {{PRODUCT_TITLE}}
 
 ## 🎯 Your Role
 
