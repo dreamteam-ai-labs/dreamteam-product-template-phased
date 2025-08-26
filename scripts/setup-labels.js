@@ -12,11 +12,33 @@ const LINEAR_API_URL = 'https://api.linear.app/graphql';
 
 // Common labels needed across phases
 const REQUIRED_LABELS = [
+  // Story types
   { name: 'user-story', color: '#4B92DB', description: 'User story issue' },
   { name: 'mvp', color: '#FF6B6B', description: 'Minimum viable product scope' },
+  { name: 'epic', color: '#1E90FF', description: 'Epic containing multiple stories' },
+  
+  // Technical areas
   { name: 'architecture', color: '#9B59B6', description: 'Architecture decision or design' },
+  { name: 'api', color: '#3498DB', description: 'API design or implementation' },
+  { name: 'backend', color: '#34495E', description: 'Backend development' },
+  { name: 'frontend', color: '#E67E22', description: 'Frontend development' },
+  { name: 'database', color: '#16A085', description: 'Database related' },
+  { name: 'infrastructure', color: '#7F8C8D', description: 'Infrastructure and DevOps' },
+  
+  // Process labels
+  { name: 'development', color: '#3498DB', description: 'Development work' },
+  { name: 'testing', color: '#95A5A6', description: 'Testing related' },
+  { name: 'performance', color: '#F39C12', description: 'Performance optimization' },
+  { name: 'security', color: '#E74C3C', description: 'Security related' },
+  { name: 'compliance', color: '#8E44AD', description: 'Compliance requirements' },
+  { name: 'documentation', color: '#52BE80', description: 'Documentation work' },
+  
+  // Priority/Status
   { name: 'blocking', color: '#E74C3C', description: 'Blocking other work' },
+  { name: 'critical', color: '#C0392B', description: 'Critical priority' },
   { name: 'test', color: '#95A5A6', description: 'Testing related' },
+  
+  // Phase labels
   { name: 'phase-0', color: '#2ECC71', description: 'Phase 0 validation' },
   { name: 'phase-1', color: '#3498DB', description: 'Phase 1 work' },
   { name: 'phase-2', color: '#9B59B6', description: 'Phase 2 work' },
