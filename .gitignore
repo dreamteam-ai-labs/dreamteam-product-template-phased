@@ -1,3 +1,9 @@
+# SECURITY - Never commit keys!
+KEYS.md
+.keys
+*.key
+*-unlock-keys.txt
+
 # Node
 node_modules/
 npm-debug.log*
