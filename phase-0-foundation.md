@@ -8,10 +8,15 @@ Prove you can connect to all required services and perform basic operations.
 
 1. Copy `.env.example` to `.env`
 2. Add your LINEAR_API_KEY
-3. Run connectivity test:
+3. Install dependencies:
    ```bash
-   bash scripts/verify-connectivity.sh
+   npm install
    ```
+4. Run connectivity test:
+   ```bash
+   npm run verify
+   ```
+   This will find your team UUID and validate your configuration.
 
 ## ✅ Required Tasks
 

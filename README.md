@@ -29,6 +29,24 @@ This template provides a **progressive learning approach** for DreamTeam project
 4. **Unlock next phase** - Use provided key with unlock script
 5. **Progress through all phases** - Building skills progressively
 
+## Quick Start
+
+After cloning this repository:
+
+```bash
+# 1. Run setup script
+bash scripts/setup.sh
+
+# 2. Add your Linear API key to .env
+# Get it from: https://linear.app/settings/api
+
+# 3. Verify connectivity
+npm run verify
+
+# 4. Start Phase 0
+# Follow instructions in phase-0-foundation.md
+```
+
 ## Files
 
 - `START-HERE.md` - Entry point and progress tracker

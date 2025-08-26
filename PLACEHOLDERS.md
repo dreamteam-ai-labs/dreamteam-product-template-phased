@@ -11,6 +11,7 @@ These placeholders MUST be replaced by the n8n workflow or setup script:
 | `{{PRODUCT_TITLE}}` | The product name/title | `UnidataHub` |
 | `{{SOLUTION_ID}}` | Linear solution epic ID | `PR858O-1/SOL-1001-unidatahub` |
 | `{{TEAM_KEY}}` | Linear team identifier | `PR858O` |
+| `{{TEAM_UUID}}` | Linear team UUID | `e1e738ea-6ea4-4e73-acc9-f56739ed4dae` |
 | `{{GITHUB_URL}}` | Full GitHub repository URL | `https://github.com/dreamteam-ai-labs/DreamTeam-UnidataHub-943` |
 | `{{PROBLEM_COUNT}}` | Number of problems being solved | `4` |
 | `{{SOLUTION_DESCRIPTION}}` | Brief solution description | `UnidataHub is a scalable B2B SaaS platform...` |
@@ -41,7 +42,8 @@ The following files contain placeholders that need replacement:
 
 4. **.env.example**
    - `{{TEAM_KEY}}` (line 13)
-   - `{{SOLUTION_ID}}` (line 14)
+   - `{{TEAM_UUID}}` (line 14)
+   - `{{SOLUTION_ID}}` (line 15)
 
 ## Replacement Script
 
