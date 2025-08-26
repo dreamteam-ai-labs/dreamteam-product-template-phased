@@ -23,7 +23,7 @@ Each phase teaches critical skills:
 | 3 | 🔒 LOCKED | +Designer, +Test | Parallel Work |
 | 4 | 🔒 LOCKED | All 16 Agents | Full Orchestration |
 
-## 🚦 Current Phase: 0
+## 🚦 Current Phase: 4
 
 **Start here**: Read `phase-0-foundation.md`
 
