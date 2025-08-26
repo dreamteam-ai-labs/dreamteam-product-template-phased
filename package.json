@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "verify": "node scripts/verify-connectivity.js",
-    "unlock": "bash scripts/unlock-phase.sh"
+    "setup-labels": "node scripts/setup-labels.js",
+    "unlock": "bash scripts/unlock-phase.sh",
+    "setup": "bash scripts/setup.sh && npm run setup-labels"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
