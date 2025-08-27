@@ -19,7 +19,7 @@ env/
 .venv/
 
 # Environment
-.env
+# Note: .env is included in template with placeholders
 .env.local
 .env.*.local
 
