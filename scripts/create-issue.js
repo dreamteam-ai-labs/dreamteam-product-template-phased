@@ -27,9 +27,9 @@ async function main() {
     
     if (result.success) {
       console.log('✅ Issue created successfully!');
-      console.log(`   ID: ${result.issue.identifier}`);
-      console.log(`   UUID: ${result.issue.id}`);
-      console.log(`   URL: ${result.issue.url}`);
+      console.log(`   ID: ${result.identifier}`);
+      console.log(`   UUID: ${result.uuid}`);
+      console.log(`   URL: ${result.url}`);
     } else {
       console.error('❌ Failed to create issue:', result.error);
     }
