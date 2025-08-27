@@ -7,8 +7,8 @@ Establish connectivity with Linear and GitHub, verify all agents are accessible,
 
 ### 1. Verify Linear Connection
 - [ ] Run `node scripts/verify-connectivity.js`
-- [ ] Confirm you can read the solution epic: {{SOLUTION_ID}}
-- [ ] Verify team access: {{TEAM_KEY}}
+- [ ] Confirm you can read the solution epic in Linear: {{SOLUTION_ID}}
+- [ ] Verify team access in Linear: {{TEAM_KEY}}
 
 ### 2. Review Your Project
 - [ ] Read the solution details in Linear
@@ -22,7 +22,7 @@ Establish connectivity with Linear and GitHub, verify all agents are accessible,
 
 ### 4. Environment Setup
 - [ ] Verify `.env` has all required variables
-- [ ] Confirm {{TECH_STACK}} dependencies available
+- [ ] Confirm development environment is ready
 - [ ] Test database connection (if applicable)
 
 ### 5. Create Foundation Issue
