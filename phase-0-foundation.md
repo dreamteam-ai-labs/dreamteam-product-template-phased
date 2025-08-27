@@ -3,14 +3,28 @@
 ## 🎯 Objective
 Establish connectivity with Linear and GitHub, verify all agents are accessible, and understand your project scope.
 
+## 🚀 Quick Start (NEW!)
+```bash
+# Auto-configure your environment (saves 10+ minutes!)
+node scripts/discover-config.js
+
+# Then verify everything works
+node scripts/verify-connectivity.js
+```
+
 ## 📋 Your Tasks
 
-### 1. Verify Linear Connection
+### 1. Auto-Configure Environment
+- [ ] Run `node scripts/discover-config.js` to automatically find configuration values
+- [ ] Review generated TEAM-CONTEXT.md for your project details
+- [ ] If any values are missing, the script will tell you where to find them
+
+### 2. Verify Linear Connection
 - [ ] Run `node scripts/verify-connectivity.js`
 - [ ] Confirm you can read the solution epic in Linear: {{SOLUTION_ID}}
 - [ ] Verify team access in Linear: {{TEAM_KEY}}
 
-### 2. Review Your Project
+### 3. Review Your Project
 - [ ] Read the solution details in Linear
 - [ ] Understand the core problem you're solving
 - [ ] Identify the primary feature for MVP: {{PRIMARY_FEATURE}}
@@ -26,7 +40,11 @@ Establish connectivity with Linear and GitHub, verify all agents are accessible,
 - [ ] Test database connection (if applicable)
 
 ### 5. Create Foundation Issue
-Create a Linear issue titled "Phase 0 Complete: {{PRODUCT_NAME}}" with:
+Use the helper script to create your completion issue:
+```bash
+node scripts/create-issue.js "Phase 0 Complete: {{PRODUCT_NAME}}" "All connections verified. Solution understood. Ready for Phase 1."
+```
+Or create manually with:
 - Confirmation that all connections work
 - Summary of the solution you're building
 - List of any issues encountered
