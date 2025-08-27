@@ -6,7 +6,7 @@ This template provides a **progressive learning approach** for DreamTeam project
 
 ## Key Features
 
-- **5 Progressive Phases** - From basic connectivity to full team orchestration
+- **7 Progressive Phases** - From basic connectivity to working implementation
 - **Skill Validation** - Each phase tests specific capabilities
 - **Encrypted Progression** - Future phases locked until current phase complete
 - **Human Verification** - Business Owner validates completion before providing keys
@@ -17,9 +17,11 @@ This template provides a **progressive learning approach** for DreamTeam project
 |-------|----------------|-------------------|
 | 0 | Claude Code only | Linear API, GitHub sync, basic operations |
 | 1 | Product Manager | Agent activation, story creation, assignment |
-| 2 | +Solution Architect | Agent handoffs, issue relationships |
-| 3 | +UX, +Test Engineer | Parallel coordination |
+| 2 | Multiple agents | Agent handoffs, issue relationships |
+| 3 | 4+ agents parallel | Parallel coordination |
 | 4 | All 16 agents | Full orchestration |
+| 5 | All agents | Autonomous MVP development |
+| 6 | All agents | Working implementation with tests |
 
 ## How It Works
 
@@ -51,10 +53,12 @@ npm run verify
 
 - `START-HERE.md` - Entry point and progress tracker
 - `phase-0-foundation.md` - Always available, tests basics
-- `phase-1-stories.md` - Encrypted until Phase 0 complete
-- `phase-2-architecture.md` - Encrypted until Phase 1 complete
-- `phase-3-parallel.md` - Encrypted until Phase 2 complete
-- `phase-4-orchestration.md` - Encrypted until Phase 3 complete
+- `phase-1-encrypted.md.enc` - Encrypted until Phase 0 complete
+- `phase-2-encrypted.md.enc` - Encrypted until Phase 1 complete
+- `phase-3-encrypted.md.enc` - Encrypted until Phase 2 complete
+- `phase-4-encrypted.md.enc` - Encrypted until Phase 3 complete
+- `phase-5-encrypted.md.enc` - Encrypted until Phase 4 complete
+- `phase-6-encrypted.md.enc` - Encrypted until Phase 5 complete
 - `scripts/unlock-phase.sh` - Decryption script
 
 ## Testing Mode
@@ -62,7 +66,10 @@ npm run verify
 For development/testing, phases can be unlocked with test keys:
 - Phase 1: `TEST-PHASE-1`
 - Phase 2: `TEST-PHASE-2`
-- etc.
+- Phase 3: `TEST-PHASE-3`
+- Phase 4: `TEST-PHASE-4`
+- Phase 5: `TEST-PHASE-5`
+- Phase 6: `TEST-PHASE-6`
 
 ## Production Mode
 

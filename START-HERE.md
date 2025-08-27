@@ -12,6 +12,8 @@ Each phase teaches critical skills:
 - Phase 2: Agent-to-agent handoffs
 - Phase 3: Parallel coordination
 - Phase 4: Full team orchestration
+- Phase 5: Autonomous MVP development
+- Phase 6: Working implementation
 
 ## 📋 Phase Progression
 
@@ -19,11 +21,13 @@ Each phase teaches critical skills:
 |-------|--------|---------|--------|
 | 0 | ✅ UNLOCKED | Claude Only | Foundation & Connectivity |
 | 1 | 🔒 LOCKED | Product Manager | User Story Creation |
-| 2 | 🔒 LOCKED | +Architect | Sequential Handoffs |
-| 3 | 🔒 LOCKED | +Designer, +Test | Parallel Work |
+| 2 | 🔒 LOCKED | Multiple Agents | Sequential Handoffs |
+| 3 | 🔒 LOCKED | 4+ Agents | Parallel Work |
 | 4 | 🔒 LOCKED | All 16 Agents | Full Orchestration |
+| 5 | 🔒 LOCKED | All Agents | MVP Development |
+| 6 | 🔒 LOCKED | All Agents | Working Code |
 
-## 🚦 Current Phase: 4
+## 🚦 Current Phase: 0
 
 **Start here**: Read `phase-0-foundation.md`
 
