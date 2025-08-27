@@ -4,7 +4,11 @@
   "description": "DreamTeam product development with phased learning",
   "main": "index.js",
   "scripts": {
+    "bootstrap": "node scripts/bootstrap.js",
+    "preflight": "node scripts/preflight.js",
     "verify": "node scripts/verify-connectivity.js",
+    "discover": "node scripts/discover-config.js",
+    "create-issue": "node scripts/create-issue.js",
     "setup-labels": "node scripts/setup-labels.js",
     "unlock": "bash scripts/unlock-phase.sh",
     "setup": "bash scripts/setup.sh && npm run setup-labels"

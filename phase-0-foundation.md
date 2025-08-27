@@ -5,11 +5,13 @@ Establish connectivity with Linear and GitHub, verify all agents are accessible,
 
 ## 🚀 Quick Start (NEW!)
 ```bash
-# Auto-configure your environment (saves 10+ minutes!)
-node scripts/discover-config.js
+# ONE COMMAND to set up everything!
+npm run bootstrap
 
-# Then verify everything works
-node scripts/verify-connectivity.js
+# Or run individual steps:
+npm run preflight     # Comprehensive checks
+npm run verify        # Test connectivity
+npm run discover      # Auto-find configuration
 ```
 
 ## 📋 Your Tasks
