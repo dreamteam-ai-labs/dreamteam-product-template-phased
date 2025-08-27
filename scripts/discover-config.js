@@ -66,26 +66,37 @@ async function graphqlRequest(query, variables = {}) {
 async function findTeamInfo(teamKey) {
   log.header(`🔍 Finding team information for key: ${teamKey}`);
   
+  // First, we need to list all teams to find the one with our key
   const query = `
-    query GetTeam($key: String!) {
-      team(key: $key) {
-        id
-        key
-        name
-        description
+    query GetTeams {
+      teams {
+        nodes {
+          id
+          key
+          name
+          description
+        }
       }
     }
   `;
   
   try {
-    const data = await graphqlRequest(query, { key: teamKey });
-    if (data.team) {
-      log.success(`Found team: ${data.team.name}`);
-      log.dim(`UUID: ${data.team.id}`);
-      return data.team;
+    const data = await graphqlRequest(query);
+    const teams = data.teams?.nodes || [];
+    
+    // Find team with matching key
+    const team = teams.find(t => t.key === teamKey);
+    
+    if (team) {
+      log.success(`Found team: ${team.name}`);
+      log.dim(`UUID: ${team.id}`);
+      return team;
+    } else {
+      log.error(`Could not find team with key ${teamKey}`);
+      log.dim(`Available teams: ${teams.map(t => t.key).join(', ')}`);
     }
   } catch (error) {
-    log.error(`Could not find team with key ${teamKey}: ${error.message}`);
+    log.error(`Could not find team: ${error.message}`);
   }
   return null;
 }
