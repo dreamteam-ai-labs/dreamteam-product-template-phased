@@ -11,6 +11,12 @@
     "create-issue": "node scripts/create-issue.js",
     "setup-labels": "node scripts/setup-labels.js",
     "unlock": "node scripts/unlock-phase.js",
+    "unlock:1": "bash scripts/unlock-phase-1.sh",
+    "unlock:2": "bash scripts/unlock-phase-2.sh",
+    "unlock:3": "bash scripts/unlock-phase-3.sh",
+    "unlock:4": "bash scripts/unlock-phase-4.sh",
+    "unlock:5": "bash scripts/unlock-phase-5.sh",
+    "unlock:6": "bash scripts/unlock-phase-6.sh",
     "setup": "bash scripts/setup.sh && npm run setup-labels"
   },
   "dependencies": {
